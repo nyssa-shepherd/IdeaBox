@@ -1,11 +1,11 @@
 .container {
     display: flex;
     flex-direction: column;
+    font-family: 'Roboto Slab', serif;
 }
 
 .top-box {
     background-color: #e5f3f2;
-    font-family: 'Roboto Slab', serif;
     height: 300px;
     text-align: center;
 }
@@ -47,11 +47,6 @@ h1{
     width: 45%;
 }
 
-input {
-    display: flex;
-    font-size: 100%;
-    justify-content: space-between;
-}
 
 .save-btn {
     background-color: #00a79d;
@@ -70,6 +65,7 @@ input {
     align-items: center;
     display: flex;
     font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
     justify-content: space-between;
     margin: auto;
 }
