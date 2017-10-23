@@ -70,11 +70,26 @@ input {
     margin: auto;
 }
 
-.card {
-    background-color: red;
-    width: 200px;
-    height: 100px;
+.bottom-box {
+    
+}
 
+.cardContainer {
+    margin: auto;
+    width: 45%;
+
+}
+
+h2 {
+   color: #6d6e71; 
+   font-family: 'Roboto Slab', serif;
+   font-size: 150%
+}
+
+p {
+    color: #939598;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 130%;
 }
 
 

@@ -1,19 +1,21 @@
+
+var numCards = 0;
 $('.save-btn').on('click', function() {
     var title = $('#title-input').val();
     var body = $('#body-input').val();
 
-    $('.title-of-card').html(title).val();
-
     $( ".bottom-box" ).prepend( 
-            '<p class="title-of-card">' + $('#title-input').val()+ '</p>' 
-            +'<p class="body-of-card">' + $('#body-input').val() + '</p>')
+            '<div id="card' + numCards + '" class="cardContainer"><h2 class="title-of-card"></h2>' 
+            +'<p class="body-of-card"></p><hr></div>');
 
+    $('#card' + numCards + ' .title-of-card').html(title);
+    $('#card' + numCards + ' .body-of-card').html(body);
 
-})
+    numCards++;
+});
 
 /* Data Model
-1. Generate Unique ID for each card.
-    - Google it!
+
 2. Add quality to each card. 
     - Concatenate in the prepend
 3. Add settings to quality and make default be the lowest (swill).
@@ -44,4 +46,4 @@ Changing the quality of an idea
 2. If else statement, upvote adds a class .plausible. if .plausible exists, add .genuis
 3. If else statement, downvote removes .genuis or .plausible.
 
-/*
+*/
