@@ -1,18 +1,19 @@
 
-
-
+var numCards = 0;
 $('.save-btn').on('click', function() {
-<<<<<<< HEAD
-    var newCard = document.createElement('article');
-        newCard.classList.add('cards')
-        newCard.innerHTML = `
-        <p class="title">${titleOfCard.value}</p>
-        <p class="url"><a target="_blank" href="${bodyOfCard.value}">${bodyOfCard.value}</a></p>
-    `
+    var title = $('#title-input').val();
+    var body = $('#body-input').val();
 
-        (newCard).prepend($('bottom-box'));
-    }
-})
+    $( ".bottom-box" ).prepend( 
+            '<div id="card' + numCards + '" class="cardContainer"><h2 class="title-of-card"></h2>' 
+            +'<p class="body-of-card"></p><hr></div>');
+
+    $('#card' + numCards + ' .title-of-card').html(title);
+    $('#card' + numCards + ' .body-of-card').html(body);
+
+    numCards++;
+});
+
 
 /* Data Model
 
