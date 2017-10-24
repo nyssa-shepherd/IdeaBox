@@ -71,12 +71,73 @@ input {
 }
 
 .card {
-    background-color: red;
-    width: 200px;
-    height: 100px;
-
+    background-color: #ffffff;
+    width: 45%;
+    height: auto;
+    margin: auto;
 }
 
+.title-of-card{
+    font-family: 'Roboto Slab', serif;
+    color: #6D6E71;
+    font-size: 140%;
+    display: inline-block;
+}
 
+.body-of-card{
+    font-family: 'Open Sans', sans-serif;
+    color: #939598;
+    font-size: 100%;
+}
 
+button {
+    border: none;
+    background-color: transparent;
+}
+
+.upvote {
+    width: 20px;
+    height: 20px;
+    background-image: url(./images/upvote.svg);
+    background-size: cover;
+    margin-right: 5px; 
+}
+
+.upvote:hover {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    background-image: url(./images/upvote-hover.svg);
+    background-size: cover;
+}
+
+.downvote {
+    width: 20px;
+    height: 20px;
+    background-image: url(./images/downvote.svg);
+    background-size: cover;
+    margin-right: 5px; 
+}
+
+.downvote:hover {
+    width: 20px;
+    height: 20px;
+    background-image: url(./images/downvote-hover.svg);
+    background-size: cover;
+}
+
+.delete-button {
+    width: 20px;
+    height: 20px;
+    background-image: url(./images/delete.svg);
+    background-size: cover;
+    margin-left: 90%;
+}
+
+.delete-button:hover {
+    width: 20px;
+    height: 20px;
+    background-image: url(./images/delete-hover.svg);
+    background-size: cover;
+}
 
