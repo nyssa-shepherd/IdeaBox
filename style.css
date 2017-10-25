@@ -68,7 +68,7 @@ input {
     margin: auto;
 }
 
-.cardContainer {
+.card-container {
     margin: auto;
     width: 45%;
 }
@@ -142,18 +142,17 @@ button {
     background-image: url(./images/downvote-hover.svg);
     background-size: cover;
 }
-#card{
-    position: relative;
-}
+
 
 .delete-button {
+    float:right;
     width: 20px;
     height: 20px;
     background-image: url(./images/delete.svg);
     background-size: cover;
-    position: absolute;
-    right: 20px;
-    top: 20px;
+    position: relative;
+    right: 5px;
+    bottom: 90px;
     
 }
 
