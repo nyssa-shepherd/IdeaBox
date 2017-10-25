@@ -1,17 +1,24 @@
+var title = $('#title-input').val();
+var body = $('#body-input').val();
+
+
 qualityVariable = "swill";
 function UniqueCard() {
-    this.title = $('#body-input').val();
-    this.body = $('#body-input').val();
-    this.quality = qualityVariable;
-    }
-
-var numCards = 0;
-$('.save-btn').on('click', function() {
     var title = $('#title-input').val();
     var body = $('#body-input').val();
+    var quality = qualityVariable;
+    console.log('hello');
+    console.log($('#title-input').val());
+
+    }
+// name the function and remove it from the event listener. Add the event listener to the top 
+// of the code, and call the function in it. Declare the function later in the code. 
+var numCards = 0;
+$('.save-btn').on('click', function() {
+    
 
     $( ".bottom-box" ).prepend( 
-        '<div id="card' + numCards + '"class="cardContainer"><h2 class="title-of-card">'  
+        '<div id="card' + numCards + '"class="card-container"><h2 class="title-of-card">'  
         + $('#title-input').val()+  '</h2>'
         + '<button class="delete-button"></button>'
         +'<p class="body-of-card">'
@@ -23,13 +30,18 @@ $('.save-btn').on('click', function() {
         + '</div>')
     
     numCards++;
-    new UniqueCard();
+    UniqueCard();
 
 console.log(UniqueCard.title)
-console.log(UniqueCard.body)
-console.log(UniqueCard.quality)
+// console.log(UniqueCard.body)
+// console.log(UniqueCard.quality)
+
+        event.preventDefault();
+        $('form')[0].reset();
+    });
+
     
-});
+
 
     $(".bottom-box").on('click', function(event){
         var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
@@ -41,22 +53,20 @@ console.log(UniqueCard.quality)
          } else if (event.target.className === "upvote" && currentQuality ==="swill") {
             qualityVariable = "plausible";
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-            console.log('tryin');
-        } 
-        else if (event.target.className === "downvote" && currentQuality ==="plausible")
+           
+        } else if (event.target.className === "downvote" && currentQuality ==="plausible")
             {qualityVariable = "swill"
-            console.log(event.target.className)
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-            // console.log(event.target.className)
-            // console.log(currentQuality)
-            }
-        else if (event.target.className === "downvote" && currentQuality ==="genius")
-            {qualityVariable = "plausible"
-            console.log(event.target.className)
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-        }
 
-    });
+        } else if (event.target.className === "downvote" && currentQuality ==="genius")
+            {qualityVariable = "plausible"
+            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+
+        } else if (event.target.className === "delete-button") {
+            $(event.target).closest('.card-container').remove();
+
+        }
+});
 
 
 // An event listener on the bottom half. If the target of
@@ -104,5 +114,6 @@ console.log(UniqueCard.quality)
 // 1. Concatenate downvote and upvote images in prepend function.
 // 2. If else statement, upvote adds a class .plausible. if .plausible exists, add .genuis
 // 3. If else statement, downvote removes .genuis or .plausible.
+
 
 

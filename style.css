@@ -68,9 +68,10 @@ input {
     margin: auto;
 }
 
-.cardContainer {
+.card-container {
     margin: auto;
     width: 45%;
+    position: relative;
 }
 
 .card {
@@ -148,7 +149,10 @@ button {
     width: 20px;
     height: 20px;
     background-image: url(./images/delete.svg);
-    background-size: cover;   
+    background-size: cover;
+    position: absolute;
+    right: 10px;
+    top: 15px;
 }
 
 .delete-button:hover {
