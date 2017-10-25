@@ -3,20 +3,22 @@ $('.save-btn').on('click', function() {
     var title = $('#title-input').val();
     var body = $('#body-input').val();
 
- $( ".bottom-box" ).prepend( 
-                '<div id="card' + numCards + '"class="cardContainer"><h2 class="title-of-card">'  
-                + $('#title-input').val() +  '</h2>'
-                + '<p class="body-of-card">'
-                + $('#body-input').val() + '</p>'
-                + '<button class="delete-button"></button>'
-                + '<button class="upvote"></button>' 
-                + '<button class="downvote"></button>' 
-                + '<p class="quality">' + 'quality:' + '<span class="qualityVariable"> swill <span>' + '<p>'
-                + '<hr>' 
-                + '</div>'
+    $( ".bottom-box" ).prepend( 
+        '<div id="card' + numCards + '"class="card-container"><h2 class="title-of-card">'  
+        + $('#title-input').val() + '</h2>'
+        + '<p class="body-of-card">'
+        + $('#body-input').val() + '</p>'
+        + '<button class="delete-button"></button>'
+        + '<button class="upvote"></button>' 
+        + '<button class="downvote"></button>' 
+        + '<p class="quality"> quality: <span class="qualityVariable">swill</span> </p>'
+        + '<hr>' 
+        + '</div>'
     )
 
         numCards++;
+        event.preventDefault();
+        $('form')[0].reset();
     });
     
     $(".bottom-box").on('click', function(event){
@@ -29,20 +31,20 @@ $('.save-btn').on('click', function() {
          } else if (event.target.className === "upvote" && currentQuality ==="swill") {
             qualityVariable = "plausible";
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-            console.log('tryin');
+           
         } else if (event.target.className === "downvote" && currentQuality ==="plausible")
             {qualityVariable = "swill"
-            console.log(event.target.className)
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-            // console.log(event.target.className)
-            // console.log(currentQuality)
+
         } else if (event.target.className === "downvote" && currentQuality ==="genius")
             {qualityVariable = "plausible"
-            console.log(event.target.className)
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-        } 
 
-    });
+        } else if (event.target.className === "delete-button") {
+            $(event.target).closest('.card-container').remove();
+
+        }
+});
 
 
 // An event listener on the bottom half. If the target of
