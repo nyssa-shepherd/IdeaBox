@@ -1,26 +1,48 @@
-var numCards = 0;
-$('.save-btn').on('click', function() {
+var title = $('#title-input').val();
+var body = $('#body-input').val();
+
+
+qualityVariable = "swill";
+function UniqueCard() {
     var title = $('#title-input').val();
     var body = $('#body-input').val();
+    var quality = qualityVariable;
+    console.log('hello');
+    console.log($('#title-input').val());
+
+    }
+// name the function and remove it from the event listener. Add the event listener to the top 
+// of the code, and call the function in it. Declare the function later in the code. 
+var numCards = 0;
+$('.save-btn').on('click', function() {
+    
 
     $( ".bottom-box" ).prepend( 
         '<div id="card' + numCards + '"class="card-container"><h2 class="title-of-card">'  
-        + $('#title-input').val() + '</h2>'
-        + '<p class="body-of-card">'
-        + $('#body-input').val() + '</p>'
+        + $('#title-input').val()+  '</h2>'
         + '<button class="delete-button"></button>'
+        +'<p class="body-of-card">'
+        + $('#body-input').val() + '</p>'
         + '<button class="upvote"></button>' 
         + '<button class="downvote"></button>' 
-        + '<p class="quality"> quality: <span class="qualityVariable">swill</span> </p>'
+        + '<p class="quality">' + 'quality:' + '<span class="qualityVariable"> swill <span>' + '<p>'
         + '<hr>' 
-        + '</div>'
-    )
+        + '</div>')
+    
+    numCards++;
+    UniqueCard();
 
-        numCards++;
+console.log(UniqueCard.title)
+// console.log(UniqueCard.body)
+// console.log(UniqueCard.quality)
+
         event.preventDefault();
         $('form')[0].reset();
     });
+
     
+
+
     $(".bottom-box").on('click', function(event){
         var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
         var qualityVariable;
