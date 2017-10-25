@@ -1,24 +1,36 @@
+qualityVariable = "swill";
+function UniqueCard() {
+    this.title = $('#body-input').val();
+    this.body = $('#body-input').val();
+    this.quality = qualityVariable;
+    }
 
 var numCards = 0;
 $('.save-btn').on('click', function() {
     var title = $('#title-input').val();
     var body = $('#body-input').val();
 
- $( ".bottom-box" ).prepend( 
-                '<div id="card" + numCards + class="cardContainer"><h2 class="title-of-card">'  
-                + $('#title-input').val()+  '</h2>'
-                + '<button class="delete-button"></button>'
-                +'<p class="body-of-card">'
-                + $('#body-input').val() + '</p>'
-                + '<button class="upvote"></button>' 
-                + '<button class="downvote"></button>' 
-                + '<p class="quality">' + 'quality:' + '<span class="qualityVariable"> swill <span>' + '<p>'
-                + '<hr>' 
-                + '</div>')
-
-        numCards++;
-    });
+    $( ".bottom-box" ).prepend( 
+        '<div id="card' + numCards + '"class="cardContainer"><h2 class="title-of-card">'  
+        + $('#title-input').val()+  '</h2>'
+        + '<button class="delete-button"></button>'
+        +'<p class="body-of-card">'
+        + $('#body-input').val() + '</p>'
+        + '<button class="upvote"></button>' 
+        + '<button class="downvote"></button>' 
+        + '<p class="quality">' + 'quality:' + '<span class="qualityVariable"> swill <span>' + '<p>'
+        + '<hr>' 
+        + '</div>')
     
+    numCards++;
+    new UniqueCard();
+
+console.log(UniqueCard.title)
+console.log(UniqueCard.body)
+console.log(UniqueCard.quality)
+    
+});
+
     $(".bottom-box").on('click', function(event){
         var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
         var qualityVariable;

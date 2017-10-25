@@ -142,19 +142,13 @@ button {
     background-image: url(./images/downvote-hover.svg);
     background-size: cover;
 }
-#card{
-    position: relative;
-}
+
 
 .delete-button {
     width: 20px;
     height: 20px;
     background-image: url(./images/delete.svg);
-    background-size: cover;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    
+    background-size: cover;   
 }
 
 .delete-button:hover {
