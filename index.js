@@ -94,7 +94,7 @@ $(".bottom-box").on('click', function(event){
     }
 });
       
-}
+
 
 
 
