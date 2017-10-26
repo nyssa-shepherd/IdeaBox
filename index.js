@@ -1,71 +1,102 @@
 var title = $('#title-input').val();
 var body = $('#body-input').val();
-
-
-qualityVariable = "swill";
-function UniqueCard() {
-    var title = $('#title-input').val();
-    var body = $('#body-input').val();
-    var quality = qualityVariable;
-    console.log('hello');
-    console.log($('#title-input').val());
-
-    }
-// name the function and remove it from the event listener. Add the event listener to the top 
-// of the code, and call the function in it. Declare the function later in the code. 
 var numCards = 0;
-$('.save-btn').on('click', function() {
-    
+qualityVariable = "swill";
 
-    $( ".bottom-box" ).prepend( 
-        '<div id="card' + numCards + '"class="card-container"><h2 class="title-of-card">'  
-        + $('#title-input').val()+  '</h2>'
-        + '<button class="delete-button"></button>'
-        +'<p class="body-of-card">'
-        + $('#body-input').val() + '</p>'
-        + '<button class="upvote"></button>' 
-        + '<button class="downvote"></button>' 
-        + '<p class="quality">' + 'quality:' + '<span class="qualityVariable"> swill <span>' + '<p>'
-        + '<hr>' 
-        + '</div>')
-    
+// $('#title-input').on('keyup', function() {
+//     if (title === "" || body === "") {
+//         ;
+//     }  
+// })
+
+var newCard = function(id , title , body , quality) {
+    return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
+            + title +  '</h2>'
+            + '<button class="delete-button"></button>'
+            +'<p class="body-of-card">'
+            + body + '</p>'
+            + '<button class="upvote"></button>' 
+            + '<button class="downvote"></button>' 
+            + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + quality + '</span>' + '</p>'
+            + '<hr>' 
+            + '</div>';
+};
+
+function cardObject() {
+    return {
+        title: $('#title-input').val(),
+        body: $('#body-input').val(),
+        quality: qualityVariable
+    };
+}
+
+$('.save-btn').on('click', function(event) {
+    event.preventDefault();
+    console.log('#body-input');
+    console.log('#title-input');
+    if ($('#title-input').val() === "" || $('#body-input').val() === "") {
+       return false;
+    };  
     numCards++;
-    UniqueCard();
+    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#body-input').val(), qualityVariable)); 
+    localStoreCard();
+    $('form')[0].reset();
+});
 
-console.log(UniqueCard.title)
-// console.log(UniqueCard.body)
-// console.log(UniqueCard.quality)
+$.each(localStorage, function(key) {
+    var cardData = JSON.parse(this);
+    numCards++;
+    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+});
 
-        event.preventDefault();
-        $('form')[0].reset();
-    });
+var localStoreCard = function() {
+    var cardString = JSON.stringify(cardObject());
+    localStorage.setItem('card' + numCards  , cardString);
+}
 
-    
 
+$(".bottom-box").on('click', function(event){
+    var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
+    var qualityVariable;
 
-    $(".bottom-box").on('click', function(event){
-        var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
-        var qualityVariable;
+    // Case 1: user clicks up or down
+    if (event.target.className === "upvote" || event.target.className === "downvote"){
+
         if (event.target.className === "upvote" && currentQuality === "plausible"){
             qualityVariable = "genius";
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-           
-         } else if (event.target.className === "upvote" && currentQuality ==="swill") {
+               
+        } else if (event.target.className === "upvote" && currentQuality ==="swill") {
             qualityVariable = "plausible";
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-           
-        } else if (event.target.className === "downvote" && currentQuality ==="plausible")
-            {qualityVariable = "swill"
+               
+        } else if (event.target.className === "downvote" && currentQuality ==="plausible") {
+            qualityVariable = "swill"
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
 
-        } else if (event.target.className === "downvote" && currentQuality ==="genius")
-            {qualityVariable = "plausible"
+        } else if (event.target.className === "downvote" && currentQuality ==="genius") {
+            qualityVariable = "plausible"
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-
-        } else if (event.target.className === "delete-button") {
-            $(event.target).closest('.card-container').remove();
-
         }
+
+    var cardHTML = $(event.target).closest('.card-container');
+    var cardHTMLId = cardHTML[0].id;
+    var cardObjectInJSON = localStorage.getItem(cardHTMLId);
+    var cardObjectInJS = JSON.parse(cardObjectInJSON);
+
+    cardObjectInJS.quality = qualityVariable;
+
+    var newCardJSON = JSON.stringify(cardObjectInJS);
+    localStorage.setItem(cardHTMLId, newCardJSON);
+
+    }
+
+    // Case 2: user click on delete    
+     else if (event.target.className === "delete-button") {
+        var cardHTML = $(event.target).closest('.card-container').remove();
+        var cardHTMLId = cardHTML[0].id;
+        localStorage.removeItem(cardHTMLId);
+    }
 });
 
 
@@ -82,38 +113,23 @@ console.log(UniqueCard.title)
 //delete function goes here //
 // });
 
-//  Data Model
-// 1. Generate Unique ID for each card.
-//     - Google it!
-// 2. Add quality to each card. 
-//     - Concatenate in the prepend
-// 3. Add settings to quality and make default be the lowest (swill).
-//     - If else, that adds a class so that the original class if the 
-//         click a button or removes a class if they click a button.
-
+// 
 // User Flows
 // 1. Users see a list of all existing ideas.
 //     - All ideas stay on the page at refresh, including title, body, and quality.
 
 // Adding a New Idea
-// 1. The text fields should be cleared when entering a new idea.
-//     - Set inner text to be an empty string on click.
-// 2. The idea should be removed from localStorage.
+
+// 2. The idea should be added localStorage.
 //     - JSON?? Look it up!
 
 // Deleting an Existing Idea.
-// 1. Add a delete button
-//     - Concatenating this button to the prepend function. 
-//     -  With an event listener on the parent class, 
-//     if (event.target.className === 'delete'){
-//     event.target.closest('article').remove();
-//     countBookmarks();
+
 // 2. The idea should be removed from localStorage.
 
-// Changing the quality of an idea
-// 1. Concatenate downvote and upvote images in prepend function.
-// 2. If else statement, upvote adds a class .plausible. if .plausible exists, add .genuis
-// 3. If else statement, downvote removes .genuis or .plausible.
+
+
+
 
 
 
