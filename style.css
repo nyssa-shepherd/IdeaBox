@@ -4,9 +4,20 @@
     font-family: 'Roboto Slab', serif;
 }
 
+.container-box {
+    margin: 0;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
 .top-box {
     background-color: #e5f3f2;
+    box-sizing: border-box;
     height: 300px;
+    margin: 0;
     text-align: center;
 }
 
@@ -16,7 +27,6 @@ h1{
     display: inline-block;
     font-size: 275%;
     margin-bottom:  30px;
-    
 }
 
 .idea {
@@ -160,5 +170,12 @@ button {
     height: 20px;
     background-image: url(./images/delete-hover.svg);
     background-size: cover;
+}
+
+@media(max-width: 640px){
+
+    .card-container{
+        width: 85%;
+    }
 }
 

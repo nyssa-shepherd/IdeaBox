@@ -1,13 +1,7 @@
 var title = $('#title-input').val();
 var body = $('#body-input').val();
 var numCards = 0;
-qualityVariable = "swill";
-
-// $('#title-input').on('keyup', function() {
-//     if (title === "" || body === "") {
-//         ;
-//     }  
-// })
+var qualityVariable = "swill";
 
 var newCard = function(id , title , body , quality) {
     return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
@@ -66,18 +60,25 @@ $(".bottom-box").on('click', function(event){
             qualityVariable = "genius";
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
                
-        } else if (event.target.className === "upvote" && currentQuality ==="swill") {
+        } else if (event.target.className === "upvote" && currentQuality === "swill") {
             qualityVariable = "plausible";
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
                
-        } else if (event.target.className === "downvote" && currentQuality ==="plausible") {
+        } else if (event.target.className === "downvote" && currentQuality === "plausible") {
             qualityVariable = "swill"
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
 
-        } else if (event.target.className === "downvote" && currentQuality ==="genius") {
+        } else if (event.target.className === "downvote" && currentQuality === "genius") {
             qualityVariable = "plausible"
             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+
+        } else if (event.target.className === "downvote" && currentQuality === "swill") {
+            qualityVariable = "swill";
+        
+        } else if (event.target.className === "upvote" && currentQuality === "genius") {
+            qualityVariable = "genius";
         }
+
 
     var cardHTML = $(event.target).closest('.card-container');
     var cardHTMLId = cardHTML[0].id;
