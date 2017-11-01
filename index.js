@@ -1,38 +1,33 @@
-var title = $('#title-input').val();
-var body = $('#body-input').val();
 var numCards = 0;
-var qualityVariable = "swill";
 
-var newCard = function(id , title , body , quality) {
-    return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
-            + title +  '</h2>'
-            + '<button class="delete-button"></button>'
-            +'<p class="body-of-card">'
-            + body + '</p>'
-            + '<button class="upvote"></button>' 
-            + '<button class="downvote"></button>' 
-            + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + quality + '</span>' + '</p>'
-            + '<hr>' 
-            + '</div>';
+var newCard = function(card) {
+    $( ".bottom-box" ).prepend(
+                '<div id="' + card.id + '"class="card-container"><h2 class="title-of-card">'  
+                + card.title +  '</h2>'
+                + '<button class="delete-button"></button>'
+                +'<p class="body-of-card">'
+                + card.body + '</p>'
+                + '<button class="upvote"></button>' 
+                + '<button class="downvote"></button>' 
+                + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + card.quality + '</span>' + '</p>'
+                + '<hr>' 
+                + '</div>'
+        )
 };
 
-function cardObject() {
-    return {
-        title: $('#title-input').val(),
-        body: $('#body-input').val(),
-        quality: qualityVariable
-    };
+function CardObject(id, title, body) {
+    this.id = id;
+    this.title = title;
+    this.body = body;
+    this.quality = 'swill'
 }
 
-$.each(localStorage, function(key) {
-    var cardData = JSON.parse(this);
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+$.each(localStorage, function(index, value) {
+    newCard(JSON.parse(value));
 });
 
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
+var localStoreCard = function(card) {
+    localStorage.setItem(card.id, JSON.stringify(card));
 }
 
 $('.save-btn').on('click', function(event) {
@@ -42,8 +37,9 @@ $('.save-btn').on('click', function(event) {
     };  
 
     numCards++;
-    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#body-input').val(), qualityVariable)); 
-    localStoreCard();
+    var card = new CardObject('card' + numCards, $('#title-input').val(), $('#body-input').val());
+    newCard(card); 
+    localStoreCard(card);
     $('form')[0].reset();
 });
 
@@ -93,14 +89,3 @@ $(".bottom-box").on('click', function(event){
         localStorage.removeItem(cardHTMLId);
     }
 });
-      
-
-
-
-
-
-
-
-
-
-
